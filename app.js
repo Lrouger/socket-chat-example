@@ -6,6 +6,14 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/style.css', function(req, res){
+  res.sendFile(__dirname + '/style.css');
+});
+
+app.get('/main.js', function(req, res){
+  res.sendFile(__dirname + '/main.js');
+});
+
 io.on('connection', function(socket){
 
   io.emit('user connection', "a user connection");
