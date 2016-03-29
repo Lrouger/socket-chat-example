@@ -2,31 +2,46 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-app.get('/', function(req, res){
+app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/style.css', function(req, res){
+app.get('/style.css', function(req, res) {
   res.sendFile(__dirname + '/style.css');
 });
 
-app.get('/main.js', function(req, res){
+app.get('/main.js', function(req, res) {
   res.sendFile(__dirname + '/main.js');
 });
 
-io.on('connection', function(socket){
+io.on('connection', function(socket) {
+  var addUser = false;
 
-  io.emit('user connection', "a user connection");
+  // When the client emit 'add user' this listens and executes
+  socket.on('add user', function(username) {
+    if(addUser) return;
 
-  socket.on('disconnect', function(){
-    io.emit('user disconnection', "user disconnection");
+    addUser = true;
+    // Store the username in the socket session for this client
+    socket.username = username;
+    socket.broadcast.emit('user joined', {
+      username : socket.username
+    });
   });
 
-  socket.on('chat message', function(msg){
+  // When user disconnect perform this
+  socket.on('disconnect', function() {
+    socket.broadcast.emit('user disconnection', {
+      username : socket.username
+    });
+  });
+
+  // When the client emit 'chat message' ,we boardcast to others
+  socket.on('chat message', function(msg) {
     io.emit('chat message', msg);
   });
 });
 
-http.listen(3000, function(){
+http.listen(3000, function() {
   console.log('listening on *:3000');
 });

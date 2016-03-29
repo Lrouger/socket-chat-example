@@ -5,22 +5,16 @@
 }
 
 html {
-  font-weight: 300;
-  -webkit-font-smoothing: antialiased;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
 }
 
-html, input {
-  font-family:
-    "HelveticaNeue-Light",
-    "Helvetica Neue Light",
-    "Helvetica Neue",
-    Helvetica,
-    Arial,
-    "Lucida Grande",
-    sans-serif;
+html,
+input {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
-form {
+.messageForm {
     background: #000;
     padding: 3px;
     position: fixed;
@@ -28,14 +22,14 @@ form {
     width: 100%;
 }
 
-form input {
+.messageForm input {
     border: 0;
     padding: 10px;
     width: 90%;
     margin-right: .5%;
 }
 
-form button {
+.messageForm button {
     width: 9%;
     background: rgb(130, 224, 255);
     border: none;
@@ -56,26 +50,26 @@ form button {
     background: #eee;
 }
 
-.chat_page{
-	display: none;
+.chat_page {
+    display: none;
 }
 
-.login_page{
-	background-color: #000;
-	position: absolute;
-	height: 100%;
-	width: 100%;
+.login_page {
+    background-color: #000;
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }
 
-.login_page .title{
-	font-weight: 100;
-	font-size: 200%;
-	color: white;
-	margin: 32px 0px;
+.login_page .title {
+    font-weight: 100;
+    font-size: 200%;
+    color: white;
+    margin: 32px 0px;
 }
 
 .login_page .form {
-	font-weight: 300;
+    font-weight: 300;
     height: 100px;
     margin-top: -100px;
     position: absolute;
@@ -84,10 +78,10 @@ form button {
     width: 100%;
 }
 
-.login_page .form .usernameInput{
-	color: #fff;
-	font-weight: 100;
-	font-size: 200%;
+.login_page .form .usernameInput {
+    color: #fff;
+    font-weight: 100;
+    font-size: 200%;
     background-color: transparent;
     border: none;
     border-bottom: 2px solid #fff;

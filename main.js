@@ -7,6 +7,7 @@ var $login_page = $('.login_page');
 var username;
 var typing = false;
 
+var $messages = $('#messages');
 var $usernameInput = $('.usernameInput');
 var $inputMessage = $('#inputMessage');
 var $currentInput = $usernameInput;
@@ -38,26 +39,43 @@ function setUserName() {
   }
 }
 
-// Replace form submit function
-$('form').submit(function() {
+/**
+ * Log a message
+ * @param  {[type]} msg [description]
+ * @return {[type]}     [description]
+ */
+function log(msg) {
+  $messages.append($('<li>').text(msg));
+}
+
+/**
+ * Send message 
+ * @return {[type]} [description]
+ */
+function sendMessage() {
   socket.emit('chat message', $inputMessage.val());
   $inputMessage.val('');
-  return false;
+}
+
+// // Replace form submit function
+// $('form').submit(function() {
+//   socket.emit('chat message', $inputMessage.val());
+//   $inputMessage.val('');
+//   return false;
+// });
+
+socket.on('user joined', function(data) {
+  log(data.username + ' joined');
 });
 
 // Chat message event
 socket.on('chat message', function(msg) {
-  $('#messages').append($('<li>').text(msg));
-});
-
-// User connection event
-socket.on('user connection', function(msg) {
-  $('#messages').append($('<li>').text(msg));
+  log(msg);
 });
 
 // User disconnection event
-socket.on('user disconnection', function(msg) {
-  $('#messages').append($('<li>').text(msg));
+socket.on('user disconnection', function(data) {
+  log(data.username + ' disconnect');
 });
 
 // Keyboard events
